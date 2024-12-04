@@ -32,7 +32,7 @@ const Navber = () => {
             <a className="neon-wrapper" href="/">
               <img
                 className="neon-logo"
-                src={"/public/Add a heading.png"}
+                src={"/public/logo.png"}
                 alt="Logo"
               />
             </a>
@@ -166,7 +166,7 @@ const Navber = () => {
                     <Button
                       variant="text"
                       size="sm"
-                      className="hidden lg:inline-block"
+                      className="hidden lg:inline-block text-white"
                     >
                       <span>Log In</span>
                     </Button>

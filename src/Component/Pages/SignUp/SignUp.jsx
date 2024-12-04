@@ -1,3 +1,4 @@
+
 import { Card, Input, Typography } from "@material-tailwind/react";
 import { BsGoogle } from "react-icons/bs";
 import { AwesomeButton } from "react-awesome-button";
@@ -21,7 +22,7 @@ const SignUp = () => {
     const handleSignInWithGoogle = async () => {
         try {
             const user = await loginWithGoogle();
-
+            // Additional verification steps if needed
             const userInfo = {
                 name: user.displayName,
                 email: user.email,
@@ -133,7 +134,7 @@ const SignUp = () => {
                 <Typography variant="h4" color="white" className="text-center font-extrabold">
                     Easysubstech | Sign Up
                 </Typography>
-                <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="mt-8  space-y-6">
                     <div>
                         <Typography variant="h6" color="white">
                             Your Name
@@ -196,20 +197,20 @@ const SignUp = () => {
                         />
                         {errors.image && <p className="text-red-400 mt-2">Upload your profile picture</p>}
                     </div>
-                    <div className="mt-6 text-center">
+                    <div className="mt-10 text-center w-full">
                         <AwesomeButton
                             type="primary"
                             size="medium"
-                            className="mt-6 bg-gradient-to-r from-blue-500 via-teal-500 to-cyan-500 text-white hover:scale-105 transition-transform"
+                            className="mt-6 w-full bg-gradient-to-r from-blue-500 via-teal-500 to-cyan-500 text-white hover:scale-105 transition-transform mb-2"
                         >
                             SignUp
                         </AwesomeButton>
                     </div>
                 </form>
-                <div className="flex justify-center items-center">
+                <div className="flex justify-center items-center my-10">
                     <BsGoogle
                         onClick={handleSignInWithGoogle}
-                        className="text-3xl text-[#008FD4] cursor-pointer hover:text-[#0870A1]"
+                        className="mt-10 text-3xl text-[#008FD4] cursor-pointer hover:text-[#0870A1]"
                     />
                 </div>
                 <Typography color="white" className="my-4 text-center">

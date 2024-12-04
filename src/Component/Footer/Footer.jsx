@@ -10,7 +10,7 @@ const Footer = () => {
                         <div className="w-full -mx-6 lg:w-2/5">
                             <div className="px-6">
                                 <a href="#">
-                                    <img className="w-auto h-12 rounded-full" src={"/public/Add a heading.png"} alt="" />
+                                    <img className="w-auto h-12 rounded-full" src={"/public/logo.png"} alt="" />
 
                                 </a>
 
