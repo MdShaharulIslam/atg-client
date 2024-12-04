@@ -105,7 +105,7 @@ const AddServices = () => {
             name="salePrice"
             value={service.salePrice}
             onChange={handleChange}
-            className="w-full p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-2 border rounded-md text-black"
             required
           />
         </div>
