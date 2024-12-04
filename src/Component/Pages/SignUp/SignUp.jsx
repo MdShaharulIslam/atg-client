@@ -1,6 +1,6 @@
 
 import { Card, Input, Typography } from "@material-tailwind/react";
-import { BsGoogle } from "react-icons/bs";
+// import { BsGoogle } from "react-icons/bs";
 import { AwesomeButton } from "react-awesome-button";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ const image_key = import.meta.env.VITE_IMAGE_KEY;
 const image_api = `https://api.imgbb.com/1/upload?key=${image_key}`;
 
 const SignUp = () => {
-    const { createUser, userUpdate, loginWithGoogle } = useAuth();
+    const { createUser, userUpdate } = useAuth();
     const {
         register,
         handleSubmit,
@@ -19,50 +19,50 @@ const SignUp = () => {
     } = useForm();
     const navigate = useNavigate();
 
-    const handleSignInWithGoogle = async () => {
-        try {
-            const user = await loginWithGoogle();
-            // Additional verification steps if needed
-            const userInfo = {
-                name: user.displayName,
-                email: user.email,
-                image: user.photoURL,
-                role: "user",
-                createdAt: new Date(),
-            };
+    // const handleSignInWithGoogle = async () => {
+    //     try {
+    //         const user = await loginWithGoogle();
+    //         // Additional verification steps if needed
+    //         const userInfo = {
+    //             name: user.displayName,
+    //             email: user.email,
+    //             image: user.photoURL,
+    //             role: "user",
+    //             createdAt: new Date(),
+    //         };
 
-            const backendResponse = await fetch("https://easysubstech-server.vercel.app/users", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(userInfo),
-            });
+    //         const backendResponse = await fetch("https://easysubstech-server.vercel.app/users", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify(userInfo),
+    //         });
 
-            if (backendResponse.ok) {
-                Swal.fire({
-                    title: "Success!",
-                    text: "Google login successful!",
-                    icon: "success",
-                    showConfirmButton: false,
-                    timer: 1000,
-                });
+    //         if (backendResponse.ok) {
+    //             Swal.fire({
+    //                 title: "Success!",
+    //                 text: "Google login successful!",
+    //                 icon: "success",
+    //                 showConfirmButton: false,
+    //                 timer: 1000,
+    //             });
 
-                navigate("/");
-            } else {
-                const backendResult = await backendResponse.json();
-                throw new Error(backendResult.message || "Failed to save user in the database.");
-            }
-        } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: error.message,
-                showConfirmButton: false,
-                timer: 1000,
-            });
-        }
-    };
+    //             navigate("/");
+    //         } else {
+    //             const backendResult = await backendResponse.json();
+    //             throw new Error(backendResult.message || "Failed to save user in the database.");
+    //         }
+    //     } catch (error) {
+    //         Swal.fire({
+    //             icon: "error",
+    //             title: "Oops...",
+    //             text: error.message,
+    //             showConfirmButton: false,
+    //             timer: 1000,
+    //         });
+    //     }
+    // };
 
     const onSubmit = async (data) => {
         try {
@@ -207,12 +207,12 @@ const SignUp = () => {
                         </AwesomeButton>
                     </div>
                 </form>
-                <div className="flex justify-center items-center my-10">
+                {/* <div className="flex justify-center items-center my-10">
                     <BsGoogle
                         onClick={handleSignInWithGoogle}
                         className="mt-10 text-3xl text-[#008FD4] cursor-pointer hover:text-[#0870A1]"
                     />
-                </div>
+                </div> */}
                 <Typography color="white" className="my-4 text-center">
                     Already have an account?{" "}
                     <Link to="/login" className="font-medium text-blue-400 hover:underline">

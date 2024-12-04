@@ -34,11 +34,11 @@ const ProductDynamic = () => {
   }
 
   return (
-    <div className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center mx-16">
+    <div className="p-6 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center mx-16">
       {services.map((service) => (
         <div
           key={service.id}
-          className="shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 "
+          className="shadow-lg rounded-lg h-[450px] overflow-hidden transition-transform transform hover:scale-105 "
         >
           <img
             src={service.image}
@@ -50,7 +50,7 @@ const ProductDynamic = () => {
               {service.productName}
             </h3>
             <p className="mb-4 text-gray-600 dark:text-gray-300">
-              {service.description}
+              {service.description.split(' ').slice(0, 15).join(' ')}
             </p>
             <div className="flex justify-between items-center mb-4">
               <span className="text-xl font-semibold text-gray-800 dark:text-gray-100">
@@ -71,3 +71,4 @@ const ProductDynamic = () => {
 };
 
 export default ProductDynamic;
+        
