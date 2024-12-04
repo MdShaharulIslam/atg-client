@@ -80,7 +80,7 @@ const SignUp = () => {
                 await userUpdate(data.name, imageResult.data.display_url);
 
                 const userInfo = {
-                    name: data.displayName,
+                    name: data.name,
                     email: data.email,
                     image: imageResult.data.display_url,
                     role: "user",
