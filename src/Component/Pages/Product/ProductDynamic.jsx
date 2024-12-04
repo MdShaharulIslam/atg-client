@@ -9,7 +9,7 @@ const ProductDynamic = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await fetch("http://localhost:5000/services");
+        const response = await fetch("https://easysubstech-server.vercel.app/services");
         if (!response.ok) {
           throw new Error("Failed to fetch services");
         }

@@ -13,7 +13,7 @@ const AddServices = () => {
 
   const image_key = import.meta.env.VITE_IMAGE_KEY;
   const image_api = `https://api.imgbb.com/1/upload?key=${image_key}`;
-  const backendURL = "http://localhost:5000/services";
+  const backendURL = "https://easysubstech-server.vercel.app/services";
 
   // Handle form input changes dynamically
   const handleChange = (e) => {

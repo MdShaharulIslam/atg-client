@@ -30,7 +30,7 @@ const SignUp = () => {
                 createdAt: new Date(),
             };
 
-            const backendResponse = await fetch("http://localhost:5000/users", {
+            const backendResponse = await fetch("https://easysubstech-server.vercel.app/users", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const SignUp = () => {
                     createdAt: new Date(),
                 };
 
-                const backendResponse = await fetch("http://localhost:5000/users", {
+                const backendResponse = await fetch("https://easysubstech-server.vercel.app/users", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
