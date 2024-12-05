@@ -1,6 +1,7 @@
 import { FaCcAmex, FaCcDiscover, FaCcMastercard, FaFacebook, FaPaypal, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { RiVisaFill } from "react-icons/ri";
+import fimg from "../../assets/logo.png";
 const Footer = () => {
     return (
         <div>
@@ -10,7 +11,7 @@ const Footer = () => {
                         <div className="w-full -mx-6 lg:w-2/5">
                             <div className="px-6">
                                 <a href="#">
-                                    <img className="w-auto h-12 rounded-full" src={"/public/logo.png"} alt="" />
+                                    <img className="w-auto h-12 rounded-full" src={fimg} alt="" />
 
                                 </a>
 

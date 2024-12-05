@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import about from "../../../../public/logo.png";
+import about from "../../../../src/assets/logo.png";
 const About = () => {
   return (
     <section className="bg-white bg-opacity-5 py-16" id="about">

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 import useAuth from "./../Hooks/useAuth";
 import Swal from "sweetalert2";
+import Limg from "../../assets/logo.png";
 
 const Navber = () => {
   const [isOpen, setIsOpen] = useState(false); // For mobile menu
@@ -32,7 +33,7 @@ const Navber = () => {
             <a className="neon-wrapper" href="/">
               <img
                 className="neon-logo"
-                src={"/public/logo.png"}
+                src={Limg}
                 alt="Logo"
               />
             </a>
