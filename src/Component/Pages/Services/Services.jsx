@@ -1,6 +1,6 @@
-import serv1 from "../../../../src/assets/payment-processing-101-header.jpg";
-import serv2 from "../../../../src/assets/crypto.jpg";
-import serv3 from "../../../../src/assets/recuring.png";
+import soundBoxImg from "../../../../src/assets/images1.jpeg";
+import headphoneImg from "../../../../src/assets/image2.jpeg";
+import microphoneImg from "../../../../src/assets/image3.jpeg";
 import { Link } from "react-router-dom";
 import ProductDynamic from "../Product/ProductDynamic";
 const Services = () => {
@@ -15,16 +15,16 @@ const Services = () => {
           {/* Service 1 */}
           <div className="bg-white bg-opacity-10 shadow-lg rounded-lg overflow-hidden">
             <img
-              src={serv1}
+              src={soundBoxImg}
               alt="Payment Processing"
               className="w-full h-48 object-cover"
             />
             <div className="p-6">
               <h3 className="text-xl font-semibold text-white mb-4">
-                Payment Processing
+              Sound Box
               </h3>
               <p className="text-white mb-4 ">
-                Secure and efficient payment solutions for businesses and individuals, supporting multiple currencies and global transactions.
+              Experience superior sound quality with our premium sound box. Perfect for music enthusiasts, it delivers crystal-clear audio with deep bass.
               </p>
               <a
                 href="#"
@@ -38,16 +38,16 @@ const Services = () => {
           {/* Service 2 */}
           <div className="bg-white bg-opacity-10 shadow-lg rounded-lg overflow-hidden">
             <img
-              src={serv2}
+              src={headphoneImg}
               alt="Crypto Payments"
               className="w-full h-48 object-cover"
             />
             <div className="p-6">
               <h3 className="text-xl font-semibold text-white mb-4">
-                Crypto Payments
+              Headphone
               </h3>
               <p className="text-white mb-4">
-                Accept cryptocurrency payments with ease using our user-friendly interface, designed for modern businesses.
+              Immerse yourself in your favorite tunes with our noise-canceling headphones. Designed for comfort, they deliver unbeatable sound clarity.
               </p>
               <a
                 href="/contact"
@@ -61,16 +61,16 @@ const Services = () => {
           {/* Service 3 */}
           <div className="bg-white bg-opacity-10 shadow-lg rounded-lg overflow-hidden">
             <img
-              src={serv3}
+              src={microphoneImg}
               alt="Recurring Payments"
               className="w-full h-48 object-cover"
             />
             <div className="p-6">
               <h3 className="text-xl font-semibold text-white mb-4">
-                Recurring Payments
+              Microphone
               </h3>
               <p className="text-white mb-4">
-                Automate subscription billing and recurring payments with our flexible and reliable solutions.
+              Record studio-quality audio with our professional-grade microphone. Ideal for content creators and professionals.
               </p>
               <Link 
                 href="/contact"

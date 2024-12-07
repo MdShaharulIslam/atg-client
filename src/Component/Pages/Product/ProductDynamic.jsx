@@ -34,11 +34,11 @@ const ProductDynamic = () => {
   }
 
   return (
-    <div className="p-6 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center mx-16">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 px-4 py-10 lg:px-20 ">
       {services.map((service) => (
         <div
           key={service.id}
-          className="shadow-lg rounded-lg h-[450px] overflow-hidden transition-transform transform hover:scale-105 "
+          className="bg-white bg-opacity-5 shadow-lg rounded-lg overflow-hidden dark:bg-opacity-10 "
         >
           <img
             src={service.image}
