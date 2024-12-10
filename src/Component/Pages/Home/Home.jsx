@@ -19,7 +19,7 @@ const Home = () => {
             <div className="w-full lg:w-1/2">
               <div className="lg:max-w-lg bg-white bg-opacity-75 p-6 rounded-lg shadow-md">
                 <h1 className="text-3xl font-semibold text-black dark:text-black lg:text-4xl">
-                  Make Your Business More Efficient with
+                Make Your Digital Experience Smarter with
                   <span className="text-blue-500"> Easysubstech </span>
                 </h1>
                 <p className="mt-3 text-gray-600 dark:text-black">
