@@ -9,9 +9,9 @@ import useAuth from "../../Hooks/useAuth";
 const image_key = import.meta.env.VITE_IMAGE_KEY;
 const image_api = `https://api.imgbb.com/1/upload?key=${image_key}`;
 
-const serviceId = "service_7r43ehg";
-const templateId = "template_dpbpc03";
-const publicKey = "6lz-2yzcFuarGaxJV";
+const serviceId = "service_xqyql81";
+const templateId = "template_9ugi12d";
+const publicKey = "vz_mcsgnNSq-e__68";
 
 const SignUp = () => {
     const { createUser, userUpdate } = useAuth();
@@ -53,7 +53,7 @@ const SignUp = () => {
                 );
 
                 if (emailResponse.status !== 200) {
-                    throw new Error("Failed to send OTP via email.");
+                    throw new Error("Failed to send OTP via email. Please try again.");
                 }
 
                 // Step 4: Prompt user for OTP
@@ -65,7 +65,7 @@ const SignUp = () => {
                     showCancelButton: true,
                 });
 
-                if (enteredOtp != otp) {
+                if (!enteredOtp || enteredOtp !== otp.toString()) {
                     Swal.fire("Signup cancelled", "Invalid OTP entered.", "error");
                     return;
                 }
@@ -114,6 +114,7 @@ const SignUp = () => {
                 throw new Error("Image upload failed.");
             }
         } catch (error) {
+            console.error("Error:", error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
