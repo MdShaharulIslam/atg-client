@@ -42,73 +42,87 @@ const SignUp = () => {
                 const otp = Math.floor(100000 + Math.random() * 900000);
 
                 // Step 3: Send OTP via EmailJS
-                const emailResponse = await emailjs.send(
-                    serviceId,
-                    templateId,
-                    {
-                        user_email: data.email,
-                        otp: otp,
-                    },
-                    publicKey
-                );
-
-                if (emailResponse.status !== 200) {
-                    throw new Error("Failed to send OTP via email.");
-                }
-
-                // Step 4: Prompt user for OTP
-                const { value: enteredOtp } = await Swal.fire({
-                    title: "Enter OTP",
-                    input: "text",
-                    inputLabel: "Check your email for the OTP",
-                    inputPlaceholder: "Enter your OTP",
-                    showCancelButton: true,
-                });
-
-                if (enteredOtp != otp) {
-                    Swal.fire("Signup cancelled", "Invalid OTP entered.", "error");
-                    return;
-                }
-
-                // Step 5: Create user account
-                await createUser(data.email, data.password);
-                await userUpdate(data.name, profileImageUrl);
-
-                const userInfo = {
-                    name: data.name,
-                    email: data.email,
-                    image: profileImageUrl,
-                    role: "user",
-                    createdAt: new Date(),
-                };
-
-                const backendResponse = await fetch(
-                    "https://easysubstech-server.vercel.app/users",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
+                try {
+                    const emailResponse = await emailjs.send(
+                        serviceId,
+                        templateId,
+                        {
+                            email: data.email,
+                            otp: otp.toString(),
                         },
-                        body: JSON.stringify(userInfo),
-                    }
-                );
+                        publicKey
+                    );
 
-                if (backendResponse.ok) {
+                    console.log("EmailJS Response:", emailResponse); // Logging the response to check if OTP is sent successfully
+
+                    if (emailResponse.status !== 200) {
+                        throw new Error("Failed to send OTP via email.");
+                    }
+
+                    // Step 4: Prompt user for OTP
+                    const { value: enteredOtp } = await Swal.fire({
+                        title: "Enter OTP",
+                        input: "text",
+                        inputLabel: "Check your email for the OTP",
+                        inputPlaceholder: "Enter your OTP",
+                        showCancelButton: true,
+                    });
+
+                    // Check OTP entered by user
+                    if (enteredOtp != otp) {
+                        Swal.fire("Signup cancelled", "Invalid OTP entered.", "error");
+                        return;
+                    }
+
+                    // Step 5: Create user account
+                    await createUser(data.email, data.password);
+                    await userUpdate(data.name, profileImageUrl);
+
+                    const userInfo = {
+                        name: data.name,
+                        email: data.email,
+                        image: profileImageUrl,
+                        role: "user",
+                        createdAt: new Date(),
+                    };
+
+                    const backendResponse = await fetch(
+                        "https://easysubstech-server.vercel.app/users",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(userInfo),
+                        }
+                    );
+
+                    if (backendResponse.ok) {
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Your account has been created successfully!",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 1000,
+                        });
+
+                        navigate("/");
+                    } else {
+                        const backendResult = await backendResponse.json();
+                        throw new Error(
+                            backendResult.message ||
+                                "Failed to save user in the database."
+                        );
+                    }
+                } catch (emailError) {
+                    console.error("EmailJS Error:", emailError); // Log any error from EmailJS
                     Swal.fire({
-                        title: "Success!",
-                        text: "Your account has been created successfully!",
-                        icon: "success",
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Failed to send OTP. Please try again later.",
                         showConfirmButton: false,
                         timer: 1000,
                     });
-
-                    navigate("/");
-                } else {
-                    const backendResult = await backendResponse.json();
-                    throw new Error(
-                        backendResult.message ||
-                            "Failed to save user in the database."
-                    );
                 }
             } else {
                 throw new Error("Image upload failed.");
@@ -138,10 +152,7 @@ const SignUp = () => {
                 >
                     Easysubstech | Sign Up
                 </Typography>
-                <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className="mt-8 space-y-6"
-                >
+                <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
                     <div>
                         <Typography variant="h6" color="white">
                             Your Name
@@ -150,18 +161,11 @@ const SignUp = () => {
                             size="lg"
                             name="name"
                             type="text"
-                            {...register("name", {
-                                required: true,
-                                maxLength: 80,
-                            })}
+                            {...register("name", { required: true, maxLength: 80 })}
                             placeholder="John Wick"
                             className="bg-gray-700 border-none text-white"
                         />
-                        {errors.name && (
-                            <p className="text-red-400 mt-2">
-                                Write your valid name
-                            </p>
-                        )}
+                        {errors.name && <p className="text-red-400 mt-2">Write your valid name</p>}
                     </div>
                     <div>
                         <Typography variant="h6" color="white">
@@ -175,11 +179,7 @@ const SignUp = () => {
                             placeholder="name@mail.com"
                             className="bg-gray-700 border-none text-white"
                         />
-                        {errors.email && (
-                            <p className="text-red-400 mt-2">
-                                Enter your valid email
-                            </p>
-                        )}
+                        {errors.email && <p className="text-red-400 mt-2">Enter your valid email</p>}
                     </div>
                     <div>
                         <Typography variant="h6" color="white">
@@ -199,8 +199,7 @@ const SignUp = () => {
                         />
                         {errors.password && (
                             <p className="text-red-400 mt-2">
-                                Password must include uppercase, lowercase, and
-                                numbers
+                                Password must include uppercase, lowercase, and numbers
                             </p>
                         )}
                     </div>
@@ -214,11 +213,7 @@ const SignUp = () => {
                             name="image"
                             className="bg-gray-700 border-none focus:ring-2 focus:ring-blue-500"
                         />
-                        {errors.image && (
-                            <p className="text-red-400 mt-2">
-                                Upload your profile picture
-                            </p>
-                        )}
+                        {errors.image && <p className="text-red-400 mt-2">Upload your profile picture</p>}
                     </div>
                     <div className="mt-10 text-center w-full">
                         <AwesomeButton
