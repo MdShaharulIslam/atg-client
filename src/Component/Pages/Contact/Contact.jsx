@@ -109,7 +109,8 @@ const ContactUs = () => {
             <div className="mb-4">
               <p className="text-white mb-2"><strong>Email:</strong> easysubstech@gmail.com</p>
               <p className="text-white mb-2"><strong>Phone:</strong> +1 (555) 123-4567</p>
-              <p className="text-white"><strong>Address:</strong> Barishal cadet collage, Barishal, Bangladesh</p>
+              <p className="text-white"><strong>Address:</strong> 30 N GOULD ST STER SHERIDAN, WY 82801 United States
+</p>
             </div>
 
             <div className="mt-6">
@@ -124,12 +125,12 @@ const ContactUs = () => {
                   Facebook
                 </a>
                 <a
-                  href="https://twitter.com/yourbusiness"
+                  href="https://wa.me/8801747677507"
                   className="text-white hover:text-blue-400"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Twitter
+                  WhatsApp
                 </a>
                 <a
                   href="https://linkedin.com/company/yourbusiness"

@@ -2,6 +2,7 @@ import { FaCcAmex, FaCcDiscover, FaCcMastercard, FaFacebook, FaPaypal, FaWhatsap
 import { FaXTwitter } from "react-icons/fa6";
 import { RiVisaFill } from "react-icons/ri";
 import fimg from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <div>
@@ -16,7 +17,7 @@ const Footer = () => {
                                 </a>
 
                                 <p className="max-w-sm mt-2 text-gray-500 dark:text-gray-400">
-                                EasySubsTech.com is a dynamic platform dedicated to enhancing your social media presence. Specializing in boosting services for platforms like Facebook, YouTube, and more, it provides reliable and efficient solutions for increasing engagement and visibility. EasySubsTech.com ensures secure, fast, and user-friendly transactions, catering to individuals and businesses seeking growth in the digital world.</p>
+                                "EasySubTech: Your trusted source for quality electronics and accessories. Fast shipping, secure payments, and exceptional service—upgrade your tech today!"</p>
 
                                 <div className="flex mt-6 -mx-2">
                                     <a href="#"
@@ -26,7 +27,7 @@ const Footer = () => {
                                        
                                     </a>
 
-                                    <a href="#"
+                                    <a href="https://wa.me/8801747677507"
                                         className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
                                         aria-label="Facebook">
                                             
@@ -46,9 +47,15 @@ const Footer = () => {
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                                 <div>
                                     <h3 className="text-gray-700 uppercase dark:text-white">About</h3>
-                                    <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">Company</a>
-                                    <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">community</a>
-                                    <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">Careers</a>
+                                    <Link to="/TermsAndConditions">
+                                     <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">Tearms & Condition</a>
+                                    </Link>
+                                   
+                                    <Link to="/ReturnPolice">
+                                     <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">Privecy Policy & Refund</a>
+                                    </Link>
+                                   
+                                    
                                 </div>
 
                                 <div >
@@ -73,9 +80,9 @@ const Footer = () => {
 
                                 <div>
                                     <h3 className="text-gray-700 uppercase dark:text-white">Products</h3>
-                                    <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">Youtube Boost</a>
-                                    <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">Facebook Boost</a>
-                                    <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">Facebook post Boost</a>
+                                    <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">Laptop </a>
+                                    <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">LED Display</a>
+                                    <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">Bluetooth Speaker</a>
                                 </div>
 
                                 <div>

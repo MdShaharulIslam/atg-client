@@ -23,15 +23,13 @@ const About = () => {
               Welcome to EasySubsTech
             </h3>
             <p className="text-white mb-4">
-              At <span className="font-medium te">EasySubsTech,</span> we are committed to transforming the way you grow and manage your social media presence. As a trusted platform for boosting services on Facebook, YouTube, and other major social platforms, we provide cutting-edge solutions to help individuals, creators, and businesses achieve their digital growth goals.
+              At <span className="font-medium te">EasySubsTech,</span> Welcome to EasySubTech, your trusted destination for top-notch electronic devices and accessories. We are dedicated to providing high-quality tech products to meet the needs of enthusiasts, professionals, and everyday users.
             </p>
             <p className="text-white mb-4">
-              Our comprehensive services are designed to increase engagement, amplify visibility, and establish your brand in the competitive world of social media. Whether you're aiming to gain more followers, enhance video views, or promote your content, <span className="font-medium te">EasySubsTech</span>  ensures a seamless and secure experience tailored to your unique needs.
+            At EasySubTech, we offer a carefully curated selection of the latest smartphones, laptops, smart home devices, gaming equipment, and essential accessories. Our mission is to simplify your tech journey by delivering premium products directly to your doorstep.
             </p>
             <p className="text-white mb-4">
-              What sets us apart is our dedication to innovation and user satisfaction. With advanced tools, expert support, and detailed analytics, we empower users to make data-driven decisions and maximize their growth potential. At <span className="font-medium te">EasySubsTech,</span>  we prioritize trust, reliability, and efficiency, making us the go-to platform for anyone looking to thrive in the ever-evolving digital landscape.
-
-              Join us on the journey to success, and let’s boost your online presence together!
+            What sets us apart is our commitment to quality, transparency, and exceptional customer service. We stock all products in-house, ensuring prompt delivery and rigorous quality checks. With fast shipping, secure payment options, and friendly support, EasySubTech is here to make your shopping experience seamless and enjoyable.
             </p>
             <div className="mt-6">
               <Link
