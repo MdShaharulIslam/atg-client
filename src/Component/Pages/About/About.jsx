@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import about from "../../../../src/assets/logo.png";
+
 const About = () => {
   return (
     <section className="bg-white bg-opacity-5 py-16" id="about">
@@ -12,7 +13,7 @@ const About = () => {
           <div className="neon-container">
             <img
               src={about}
-              alt="bdCoinsPaid Logo"
+              alt="EasyTechMart Logo"
               className="mx-auto"
             />
           </div>
@@ -20,7 +21,7 @@ const About = () => {
           {/* Description Section */}
           <div>
             <h3 className="text-2xl font-semibold text-white mb-4">
-              Welcome to EasySubsTech
+              Welcome to EasySubTech
             </h3>
             <p className="text-white mb-4">
               At <span className="font-medium te">EasySubsTech,</span> Welcome to EasySubTech, your trusted destination for top-notch electronic devices and accessories. We are dedicated to providing high-quality tech products to meet the needs of enthusiasts, professionals, and everyday users.
@@ -33,10 +34,10 @@ const About = () => {
             </p>
             <div className="mt-6">
               <Link
-                to="/contact"
+                to="/services"
                 className="bg-blue-500 text-white py-2 px-6 rounded-lg font-semibold hover:bg-blue-600 transition duration-200"
               >
-                Contact Us
+                Shop Now
               </Link>
             </div>
           </div>
@@ -48,14 +49,7 @@ const About = () => {
             Why Choose Us?
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
-            {[
-              "Crypto Payments",
-              "Recurring Payments",
-              "Fraud Prevention",
-              "Global Reach",
-              "Secure Transactions",
-              "User-Friendly Interface",
-            ].map((feature, index) => (
+            {["Latest Products", "Affordable Prices", "Fast Shipping", "Secure Transactions", "Customer Support", "Exclusive Deals"].map((feature, index) => (
               <span
                 key={index}
                 className="px-4 py-2 bg-blue-100 text-blue-600 font-semibold rounded-lg shadow-md"
