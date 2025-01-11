@@ -1,243 +1,130 @@
-import { Card, Input, Typography } from "@material-tailwind/react";
-import { AwesomeButton } from "react-awesome-button";
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import emailjs from "emailjs-com";
-import useAuth from "../../Hooks/useAuth";
-
-const image_key = import.meta.env.VITE_IMAGE_KEY;
-const image_api = `https://api.imgbb.com/1/upload?key=${image_key}`;
-
-const serviceId = "service_xqyql81";
-const templateId = "template_9ugi12d";
-const publicKey = "vz_mcsgnNSq-e__68";
+import { useState } from "react";
 
 const SignUp = () => {
-    const { createUser, userUpdate } = useAuth();
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
-    const navigate = useNavigate();
+  const [isSignup, setIsSignup] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(true); // State to control the modal visibility
 
-    const onSubmit = async (data) => {
-        try {
-            // Step 1: Upload image to imgbb
-            const formData = new FormData();
-            formData.append("image", data.image[0]);
+  const handleClose = () => {
+    setIsModalOpen(false); // Close the modal
+  };
 
-            const imageResponse = await fetch(image_api, {
-                method: "POST",
-                body: formData,
-            });
+  if (!isModalOpen) {
+    return null; // If modal is closed, render nothing
+  }
 
-            const imageResult = await imageResponse.json();
-
-            if (imageResult.success) {
-                const profileImageUrl = imageResult.data.display_url;
-
-                // Step 2: Generate OTP
-                const otp = Math.floor(100000 + Math.random() * 900000);
-
-                // Step 3: Send OTP via EmailJS
-                try {
-                    const emailResponse = await emailjs.send(
-                        serviceId,
-                        templateId,
-                        {
-                            email: data.email,
-                            otp: otp.toString(),
-                        },
-                        publicKey
-                    );
-
-                    console.log("EmailJS Response:", emailResponse); // Logging the response to check if OTP is sent successfully
-
-                    if (emailResponse.status !== 200) {
-                        throw new Error("Failed to send OTP via email.");
-                    }
-
-                    // Step 4: Prompt user for OTP
-                    const { value: enteredOtp } = await Swal.fire({
-                        title: "Enter OTP",
-                        input: "text",
-                        inputLabel: "Check your email for the OTP",
-                        inputPlaceholder: "Enter your OTP",
-                        showCancelButton: true,
-                    });
-
-                    // Check OTP entered by user
-                    if (enteredOtp != otp) {
-                        Swal.fire("Signup cancelled", "Invalid OTP entered.", "error");
-                        return;
-                    }
-
-                    // Step 5: Create user account
-                    await createUser(data.email, data.password);
-                    await userUpdate(data.name, profileImageUrl);
-
-                    const userInfo = {
-                        name: data.name,
-                        email: data.email,
-                        image: profileImageUrl,
-                        role: "user",
-                        createdAt: new Date(),
-                    };
-
-                    const backendResponse = await fetch(
-                        "https://easysubstech-server.vercel.app/users",
-                        {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(userInfo),
-                        }
-                    );
-
-                    if (backendResponse.ok) {
-                        Swal.fire({
-                            title: "Success!",
-                            text: "Your account has been created successfully!",
-                            icon: "success",
-                            showConfirmButton: false,
-                            timer: 1000,
-                        });
-
-                        navigate("/");
-                    } else {
-                        const backendResult = await backendResponse.json();
-                        throw new Error(
-                            backendResult.message ||
-                                "Failed to save user in the database."
-                        );
-                    }
-                } catch (emailError) {
-                    console.error("EmailJS Error:", emailError); // Log any error from EmailJS
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Failed to send OTP. Please try again later.",
-                        showConfirmButton: false,
-                        timer: 1000,
-                    });
-                }
-            } else {
-                throw new Error("Image upload failed.");
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: error.message,
-                showConfirmButton: false,
-                timer: 1000,
-            });
-        }
-    };
-
-    return (
-        <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
-            <Card
-                color="transparent"
-                shadow={false}
-                className="mx-auto md:w-1/2 lg:w-1/3 bg-gray-800 p-8 rounded-lg"
-            >
-                <Typography
-                    variant="h4"
-                    color="white"
-                    className="text-center font-extrabold"
-                >
-                    Easysubstech | Sign Up
-                </Typography>
-                <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
-                    <div>
-                        <Typography variant="h6" color="white">
-                            Your Name
-                        </Typography>
-                        <Input
-                            size="lg"
-                            name="name"
-                            type="text"
-                            {...register("name", { required: true, maxLength: 80 })}
-                            placeholder="John Wick"
-                            className="bg-gray-700 border-none text-white"
-                        />
-                        {errors.name && <p className="text-red-400 mt-2">Write your valid name</p>}
-                    </div>
-                    <div>
-                        <Typography variant="h6" color="white">
-                            Your Email
-                        </Typography>
-                        <Input
-                            size="lg"
-                            name="email"
-                            type="email"
-                            {...register("email", { required: true })}
-                            placeholder="name@mail.com"
-                            className="bg-gray-700 border-none text-white"
-                        />
-                        {errors.email && <p className="text-red-400 mt-2">Enter your valid email</p>}
-                    </div>
-                    <div>
-                        <Typography variant="h6" color="white">
-                            Password
-                        </Typography>
-                        <Input
-                            type="password"
-                            name="password"
-                            size="lg"
-                            {...register("password", {
-                                required: true,
-                                minLength: 6,
-                                pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/,
-                            })}
-                            placeholder="********"
-                            className="bg-gray-700 border-none text-white"
-                        />
-                        {errors.password && (
-                            <p className="text-red-400 mt-2">
-                                Password must include uppercase, lowercase, and numbers
-                            </p>
-                        )}
-                    </div>
-                    <div>
-                        <Typography variant="h6" color="white">
-                            Profile Picture
-                        </Typography>
-                        <Input
-                            type="file"
-                            {...register("image", { required: true })}
-                            name="image"
-                            className="bg-gray-700 border-none focus:ring-2 focus:ring-blue-500"
-                        />
-                        {errors.image && <p className="text-red-400 mt-2">Upload your profile picture</p>}
-                    </div>
-                    <div className="mt-10 text-center w-full">
-                        <AwesomeButton
-                            type="primary"
-                            size="medium"
-                            className="mt-6 w-full bg-gradient-to-r from-blue-500 via-teal-500 to-cyan-500 text-white hover:scale-105 transition-transform mb-2"
-                        >
-                            SignUp
-                        </AwesomeButton>
-                    </div>
-                </form>
-                <Typography color="white" className="my-4 text-center">
-                    Already have an account?{" "}
-                    <Link
-                        to="/login"
-                        className="font-medium text-blue-400 hover:underline"
-                    >
-                        Login
-                    </Link>
-                </Typography>
-            </Card>
+  return (
+    <div
+      className="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex items-center justify-center"
+      style={{ zIndex: 2 }}
+    >
+      <div className="bg-white rounded-lg w-11/12 md:w-3/4 lg:w-1/2">
+        {/* Header Section */}
+        <div className="flex justify-between items-center border-b p-4">
+          <h2 className="text-lg font-bold">
+            Let’s learn, share & inspire each other with our passion for computer engineering.{" "}
+            <span className="text-blue-500">Sign up now 🤘🏼</span>
+          </h2>
+          <button
+            onClick={handleClose}
+            className="text-gray-500 hover:text-gray-700 focus:outline-none text-2xl"
+          >
+            &times;
+          </button>
         </div>
-    );
+
+        {/* Toggle Buttons */}
+        <div className="px-6 py-4 flex justify-between items-center">
+          <h3 className="text-xl font-semibold">
+            {isSignup ? "Create Account" : "Sign In"}
+          </h3>
+          <button
+            onClick={() => setIsSignup(!isSignup)}
+            className="text-blue-500 hover:underline"
+          >
+            {isSignup ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
+          </button>
+        </div>
+
+        {/* Form Section */}
+        <div className="px-6 pb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Left Side Form */}
+            <div>
+              {isSignup && (
+                <div className="grid grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    placeholder="First Name"
+                    className="border rounded p-2 w-full"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Last Name"
+                    className="border rounded p-2 w-full"
+                  />
+                </div>
+              )}
+              <input
+                type="email"
+                placeholder="Email"
+                className="border rounded p-2 w-full mt-4"
+              />
+              <div className="relative mt-4">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  className="border rounded p-2 w-full"
+                />
+                <button className="absolute top-2 right-3 text-gray-500">
+                  <i className="far fa-eye"></i>
+                </button>
+              </div>
+              {isSignup && (
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  className="border rounded p-2 w-full mt-4"
+                />
+              )}
+              <button className="w-full bg-blue-500 text-white p-2 rounded mt-4">
+                {isSignup ? "Create Account" : "Sign In"}
+              </button>
+
+              <div className="flex flex-col gap-2 mt-4">
+                <button className="flex items-center justify-center border p-2 rounded gap-2">
+                  <img
+                    src="https://dont-copy.netlify.app/assets/facebook-ImnSLa_q.svg"
+                    alt="Facebook"
+                    className="w-5"
+                  />
+                  {isSignup ? "Sign Up" : "Sign In"} with Facebook
+                </button>
+                <button className="flex items-center justify-center border p-2 rounded gap-2">
+                  <img
+                    src="https://dont-copy.netlify.app/assets/google.svg"
+                    alt="Google"
+                    className="w-5"
+                  />
+                  {isSignup ? "Sign Up" : "Sign In"} with Google
+                </button>
+              </div>
+            </div>
+
+            <div className="hidden md:flex flex-col items-center justify-center">
+              <img
+                src="https://dont-copy.netlify.app/assets/signup-OCG-APNN.svg"
+                alt="Illustration"
+                className="w-3/4"
+              />
+              <p className="text-gray-500 mt-4 text-center text-sm">
+                By signing up, you agree to our Terms & Conditions and Privacy Policy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default SignUp;
