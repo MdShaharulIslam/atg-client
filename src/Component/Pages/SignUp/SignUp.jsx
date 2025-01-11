@@ -1,15 +1,17 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   const [isSignup, setIsSignup] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(true); // State to control the modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(true); 
+  const navigate = useNavigate();
 
   const handleClose = () => {
-    setIsModalOpen(false); // Close the modal
+    setIsModalOpen(false); 
+    navigate("/");
   };
 
   if (!isModalOpen) {
-    return null; // If modal is closed, render nothing
+    return null; 
   }
 
   return (
