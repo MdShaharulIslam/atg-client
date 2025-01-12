@@ -9,7 +9,7 @@ const Home = () => {
       <header
         className="bg-cover h-96 bg-center bg-no-repeat bg-white dark:bg-gray-900"
         style={{
-          backgroundImage: `url(${bgImage})`, // Correct way to interpolate the bgImage variable
+          backgroundImage: `url(${bgImage})`, 
         }}
       >
         <div className="container px-6 mx-auto text-left pt-60">
